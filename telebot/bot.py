@@ -81,10 +81,6 @@ class Bot(object):
         bot.send_message(chat_id=update.message.chat_id, text=text)
 
     def init_plugins(self):
-        # Default
-        plugindir = DIR('plugins')
-        LOG.debug('Plugindir: {}' . format(plugindir))
-
         for _, name, _ in pkgutil.iter_modules(telebot.plugins.__path__):
             try:
                 LOG.debug('Plugin: {}' . format(name))
