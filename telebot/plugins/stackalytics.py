@@ -73,7 +73,7 @@ def handle(bot, update):
         return
 
     text = '{} *Report:*\n' . format(emojies.point_right) 
-    template = '- Member `{}`:  `{}` patches,  `{}` commits,  `{}` reviews.\n'
+    template = '- Member `{}`: `{}` patches, `{}` commits, `{}` reviews.\n'
     for member in config['members']:
         results = query(bot, update,
                         user_id=member,
