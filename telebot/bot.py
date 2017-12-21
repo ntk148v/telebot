@@ -1,6 +1,3 @@
-import copy
-import functools
-from glob import glob
 import logging
 import importlib
 import os
@@ -8,16 +5,14 @@ import pkgutil
 import sys
 import traceback
 
-from emoji import emojize
 from telegram.ext import CommandHandler
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
 from telegram.ext import Updater
 
 import telebot.plugins
+from telebot import emojies
 
-CURDIR = os.path.abspath(os.path.dirname(__file__))
-DIR = functools.partial(os.path.join, CURDIR)
 LOG = logging.getLogger(__name__)
 
 
@@ -77,20 +72,20 @@ class Bot(object):
                               'more info')
 
     def help(self, bot, update):
-        # Fancy icon
-        icon = emojize(":information_source:", use_aliases=True)
         commands = self._get_commands()
         command_names = [cmd[0].strip('/') for cmd in commands]
 
         text = 'Please type: /help <command> with <command> is optional.'
         user_input = update.message.text.split(' ')
         if len(user_input) == 1:
-            text = icon + ' The following commands are available:\n'
+            text = emojies.information_source + \
+                ' The following commands are available:\n'
 
             for command in commands:
                 text += command[0] + '-' + command[1] + '\n'
         elif len(user_input) == 2 and user_input[1] in command_names:
-            text = icon + ' ' + self.plugins[user_input[1]]['usage']
+            text = emojies.information_source + ' ' + \
+                self.plugins[user_input[1]]['usage']
 
         bot.send_message(chat_id=update.message.chat_id, text=text)
 

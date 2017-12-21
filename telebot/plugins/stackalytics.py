@@ -20,6 +20,7 @@ import urllib.request
 
 from telegram import ParseMode
 
+from telebot import emojies
 from telebot import utils
 
 LOG = logging.getLogger(__name__)
@@ -71,8 +72,8 @@ def handle(bot, update):
         utils.handle_error(LOG, bot, update.message.chat_id, msg)
         return
 
-    text = 'Report:\n'
-    template = '- Member `{}`: `{}` patches, `{}` commits, `{}` reviews.\n'
+    text = '{} *Report:*\n' . format(emojies.point_right) 
+    template = '- Member `{}`:  `{}` patches,  `{}` commits,  `{}` reviews.\n'
     for member in config['members']:
         results = query(bot, update,
                         user_id=member,
