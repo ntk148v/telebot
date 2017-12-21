@@ -40,6 +40,13 @@ class Bot(object):
         # Init additional plugins handlers
         for plugin in self.plugins.keys():
             _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
+            if plugin == 'remind':
+                _handler = CommandHandler(plugin,
+                                          self.plugins[plugin]['handler'],
+                                          pass_args=True,
+                                          pass_job_queue=True,
+                                          pass_chat_data=True)
+
             self.dispatcher.add_handler(_handler)
         file_handler = MessageHandler(filters=Filters.document,
                                       callback=self.get_config_file)
