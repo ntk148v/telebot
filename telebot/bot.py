@@ -57,7 +57,7 @@ class Bot(object):
         else:
             file_id = update.message.document.file_id
             config_file = bot.get_file(file_id=file_id)
-            config_file.download(custom_path='/tmp/stackalyticsconfig')
+            config_file.download(custom_path='/tmp/stackalyticsconfig.json')
 
     def _get_commands(self):
         commands = []
