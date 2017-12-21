@@ -10,6 +10,8 @@ import traceback
 
 from emoji import emojize
 from telegram.ext import CommandHandler
+from telegram.ext import Filters
+from telegram.ext import MessageHandler
 from telegram.ext import Updater
 
 import telebot.plugins
@@ -44,6 +46,18 @@ class Bot(object):
         for plugin in self.plugins.keys():
             _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
             self.dispatcher.add_handler(_handler)
+        file_handler = MessageHandler(filters=Filters.document,
+                                      callback=self.get_config_file)
+        self.dispatcher.add_handler(file_handler)
+
+    def get_config_file(self, bot, update):
+        """Handle config file upload. Stackalytics plugin need this!"""
+        if not update.message.document:
+            return
+        else:
+            file_id = update.message.document.file_id
+            config_file = bot.get_file(file_id=file_id)
+            config_file.download(custom_path='/tmp/stackalyticsconfig')
 
     def _get_commands(self):
         commands = []
