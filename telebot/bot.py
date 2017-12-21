@@ -87,8 +87,8 @@ class Bot(object):
                 module = importlib.import_module('telebot.plugins.' + name)
                 module_name = module.__name__.split('.')[-1]
                 _info = {
-                    'whatis': 'Unknow command',
-                    'usage': 'Unknow usage',
+                    'whatis': 'Unknown command',
+                    'usage': 'Unknown usage',
                     'handler': getattr(module, 'handle')
                 }
 
