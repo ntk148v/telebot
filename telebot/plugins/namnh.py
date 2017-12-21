@@ -1,4 +1,4 @@
-"""A joke about NamNH
+"""A joke about my colleague - NamNH :lmao:
 /namnh - Chot Chat command
 """
 from telebot import emojies
