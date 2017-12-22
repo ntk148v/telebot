@@ -3,6 +3,8 @@
 """
 import datetime
 
+from telegram import ParseMode
+
 from telebot import emojies
 
 
@@ -12,7 +14,8 @@ def do_remind(bot, job):
         emojies.bell)
 
     chat_id = job.context['chat_id']
-    bot.send_message(chat_id=chat_id, text=reminder)
+    bot.send_message(chat_id=chat_id, text=reminder,
+                     parse_mode=ParseMode.MARKDOWN)
     return
 
 
