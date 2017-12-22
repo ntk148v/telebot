@@ -32,7 +32,7 @@ from telebot import utils
 LOG = logging.getLogger(__name__)
 
 
-def query(bot, update, user_id=None, company=None):
+def query(bot, chat_id, user_id=None, company=None):
     """Query to http://stackalytics.com/"""
     url = 'http://stackalytics.com/api/1.0/contribution?'
 
@@ -48,11 +48,11 @@ def query(bot, update, user_id=None, company=None):
         stats = json.loads(stats.read().decode())
     except ValueError as e:
         msg = 'Error with JSON format: {}' . format(e)
-        utils.handle_error(LOG, bot, update.message.chat_id, msg)
+        utils.handle_error(LOG, bot, chat_id, msg)
         return None
     except urllib.error.HTTPError as e:
         msg = 'Error when query member {}\'s stats: {}' . format(user_id, e)
-        utils.handle_error(LOG, bot, update.message.chat_id, msg)
+        utils.handle_error(LOG, bot, chat_id, msg)
         return None
     patches = stats['contribution']['patch_set_count']
     commits = stats['contribution']['commit_count']
@@ -187,17 +187,18 @@ def get_report(workbook, worksheet, member, stats, targets,
 
 
 def handle(bot, update):
+    chat_id = update.message.chat_id
     try:
         config = json.load(open('/tmp/stackalyticsconfig.json'))
     except FileNotFoundError:
         msg = 'Config file doesn\' exist! Type /hep stackalytics again to \
                check usage!'
-        utils.handle_error(LOG, bot, update.message.chat_id, msg)
+        utils.handle_error(LOG, bot, chat_id, msg)
         return
     except json.decoder.JSONDecodeError:
         msg = 'Wrong format! Type /hep stackalytics again to \
               check right format!'
-        utils.handle_error(LOG, bot, update.message.chat_id, msg)
+        utils.handle_error(LOG, bot, chat_id, msg)
         return
 
     args = update.message.text.split(' ')
@@ -230,7 +231,7 @@ def handle(bot, update):
     worksheet = workbook.add_worksheet()
 
     for index, member in enumerate(config['members']):
-        results = query(bot, update,
+        results = query(bot, chat_id,
                         user_id=member,
                         company=config['company'])
         if not results:
@@ -254,11 +255,11 @@ def handle(bot, update):
 
     workbook.close()
 
-    bot.send_message(chat_id=update.message.chat_id,
+    bot.send_message(chat_id=chat_id,
                      text=text,
                      parse_mode=ParseMode.MARKDOWN)
     if report:
-        bot.send_document(chat_id=update.message.chat_id,
+        bot.send_document(chat_id=chat_id,
                           document=open(report_file, 'rb'),
                           caption='Report')
     return
