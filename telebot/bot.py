@@ -40,7 +40,7 @@ class Bot(object):
         # Init additional plugins handlers
         for plugin in self.plugins.keys():
             _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
-            if plugin == 'remind':
+            if plugin == 'remind' or plugin == 'cureport':
                 _handler = CommandHandler(plugin,
                                           self.plugins[plugin]['handler'],
                                           pass_args=True,
