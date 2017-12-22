@@ -15,3 +15,4 @@ def handle(bot, update):
     bot.send_sticker(chat_id=update.message.chat_id,
                      caption='Chotchat',
                      sticker=open(IMG, 'rb'))
+    return
