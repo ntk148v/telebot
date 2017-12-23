@@ -1,7 +1,7 @@
 """Get report from Stackalytics
-/stackalytics - Get report from Stackalytics
+/tc - Get report from Stackalytics
 
-- Just type /stackalytics without any additional options.
+- Just type /tc without any additional options.
 - Firstly, need to upload config file with json format:
 
 For e.x:
