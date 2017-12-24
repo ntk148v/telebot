@@ -3,8 +3,11 @@ import importlib
 import os
 import pkgutil
 import sys
+import time
 import traceback
 
+from slackclient import SlackClient
+import telegram.bot
 from telegram.ext import CommandHandler
 from telegram.ext import Filters
 from telegram.ext import MessageHandler
@@ -21,8 +24,10 @@ def strip_extension(lst):
     return (os.path.splitext(l)[0] for l in lst)
 
 
-class Bot(object):
+class Bot(telegram.bot.Bot):
+
     def __init__(self, token):
+        super(Bot, self).__init__(token)
         self.scheduler = None
         self.updater = Updater(token=token)
         self.dispatcher = self.updater.dispatcher
@@ -120,3 +125,51 @@ class Bot(object):
                             format(name))
                 LOG.warning('{}' . format(sys.exc_info()[0]))
                 LOG.warning('{}' . format(traceback.format_exc()))
+
+    def slack_to_telegram(cls):
+        try:
+            # telegram_target_id = 430330296
+            telegram_target_id = os.getenv('TELEGRAM_TARGETS')
+            slack_token = os.getenv('SLACK_TOKEN')
+            if not slack_token:
+                cls.send_message(telegram_target_id,
+                                 'Connection failed, invalid format')
+                return
+            sc = SlackClient(slack_token)
+            if sc.rtm_connect():
+                while True:
+                    messages = sc.rtm_read()
+                    for message in messages:
+                        if message['type'] == 'message':
+                            if message['channel'][0] == 'G':
+                                channel = sc.api_call(
+                                    'groups.info',
+                                    channel=message['channel'])['group']
+                            elif message['channel'][0] == 'C':
+                                channel = sc.api_call(
+                                    'channels.info',
+                                    channel=message['channel'])['channel']
+                            else:
+                                channel = {'name': 'bot'}
+
+                            user = sc.api_call(
+                                'users.info',
+                                user=message['user'])['user']
+
+                            msg_string = '@{} posted to #{}: {}' . format(
+                                user['name'],
+                                channel['name'],
+                                message['text']
+                            )
+                            cls.send_message(chat_id=telegram_target_id,
+                                             text=msg_string)
+                    time.sleep(1)
+            else:
+                cls.send_message(telegram_target_id,
+                                 'Connection failed, invalid token?')
+                return
+        except Exception as e:
+            msg = 'Could not send message because: {}' . format(str(e))
+            cls.send_message(telegram_target_id,
+                             msg)
+            return

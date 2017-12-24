@@ -14,4 +14,5 @@ if __name__ == '__main__':
     TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
     BOT = bot.Bot(TELEGRAM_TOKEN)
     BOT.run()
+    BOT.slack_to_telegram()
     LOG.info('Bot started!')
