@@ -1,1 +1,2 @@
 TELEGRAM_TOKEN=<put_telegram_token>
+SLACK_TOKEN=<put_slack_token_here>
