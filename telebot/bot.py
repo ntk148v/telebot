@@ -129,7 +129,7 @@ class Bot(telegram.bot.Bot):
     def slack_to_telegram(cls):
         try:
             # telegram_target_id = 430330296
-            telegram_target_id = os.getenv('TELEGRAM_TARGETS')
+            telegram_target_id = os.getenv('TELEGRAM_TARGET')
             slack_token = os.getenv('SLACK_TOKEN')
             if not slack_token:
                 cls.send_message(telegram_target_id,
