@@ -12,6 +12,7 @@ from telegram.ext import Updater
 
 import telebot.plugins
 from telebot import emojies
+from telebot import settings
 
 LOG = logging.getLogger(__name__)
 
@@ -40,7 +41,7 @@ class Bot(object):
         # Init additional plugins handlers
         for plugin in self.plugins.keys():
             _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
-            if plugin == 'remind' or plugin == 'cureport':
+            if plugin in settings.JOB_PLUGINS:
                 _handler = CommandHandler(plugin,
                                           self.plugins[plugin]['handler'],
                                           pass_args=True,
