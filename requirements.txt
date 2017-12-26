@@ -2,3 +2,4 @@ python-telegram-bot==9.0.0
 apscheduler==3.5.0
 emoji==0.4.5
 xlsxwriter==1.0.2
+slackclient
