@@ -3,7 +3,8 @@
 
 - Just type /stackalytics for query stats
 - Type /stackalytics report to get report in xlsx format.
-- Firstly, need to upload config file with json format:
+- Firstly, need to chat direct with bot and upload config file
+with json format:
 
 For e.x:
     {
