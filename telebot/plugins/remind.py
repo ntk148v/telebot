@@ -1,5 +1,6 @@
-"""Remind everyone in team to send report
-/remind hour:minute reminder - Remind at hour:minute everyday!
+"""Remind everyone in team
+Usage:
+/remind hour:minute reminder- Remind something at hour:minute!
 """
 import datetime
 
@@ -30,14 +31,10 @@ def handle(bot, update, args, job_queue, chat_data):
         context['chat_id'] = chat_id
         context['reminder'] = reminder
 
-        # Add job to queue, run daily
-        if len(job_queue.jobs()):
-            for job in job_queue.jobs():
-                job.schedule_removal()
-
-        job = job_queue.run_daily(do_remind,
-                                  time=datetime.time(hour=hour, minute=minute),
-                                  context=context)
+        # Add job to queue, run once
+        job = job_queue.run_once(do_remind,
+                                 when=datetime.time(hour=hour, minute=minute),
+                                 context=context)
         chat_data['job'] = job
 
         update.message.reply_text('Timer successfully set!')
