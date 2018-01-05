@@ -71,13 +71,17 @@ class Bot(object):
         return commands
 
     def run(self):
-        self.updater.start_polling()
+        self.updater.start_polling(clean=True)
         return
 
     def start(self, bot, update):
         bot.send_message(chat_id=update.message.chat_id,
                          text='Hallo! I\'m Telebot, please type /help for '
                               'more info')
+
+    def stop(self):
+        self.updater.stop()
+        return
 
     def help(self, bot, update):
         commands = self._get_commands()
