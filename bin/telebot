@@ -5,8 +5,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description="Run the telebot for Telegram")
 parser.add_argument('--logstream', dest='logstream', action='store_true',
-                    help='Use log as stream instead of write log to
-                    file.')
+                    help='Use log as stream instead of write log to file.')
 parser.add_argument('--debug', '-D', dest='debug', action='store_true',
                     help='Use logging.DEBUG level.')
 args = parser.parse_args()
