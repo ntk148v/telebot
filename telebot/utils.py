@@ -1,5 +1,4 @@
 import logging
-import sys
 
 from telebot import emojies
 
@@ -19,9 +18,9 @@ def init_log(config):
         'logformat',
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    if not stream:
-        logging.basicConfig(filename=logfile,
-                            format=logformat, level=loglevel)
-    else:
-        logging.basicConfig(format=logformat, level=loglevel,
-                            stream=sys.stdout)
+    handlers = [logging.FileHandler(logfile), ]
+    if stream:
+        handlers.append(logging.StreamHandler())
+
+    logging.basicConfig(format=logformat, level=loglevel,
+                        handlers=handlers)
