@@ -12,7 +12,7 @@ setup(
     name='telebot',
     version='1.0.0',
     description='Python Telegram Bot.',
-    long_description=longdesc
+    long_description=longdesc,
     author='Kien Nguyen',
     author_email='kiennt2609@gmail.com',
     license='Apache-2.0',
