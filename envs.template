@@ -1,1 +1,4 @@
-TELEGRAM_TOKEN=<put_telegram_token>
+TELEGRAM_TOKEN="<put your telegram token>"
+TELEBOT_LOGFILE='"/var/log/telebot.log"
+TELEBOT_LOGFORMAT="<put your format>"
+TELEBOT_LEVEL="<put your log level>"
