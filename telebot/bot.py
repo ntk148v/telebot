@@ -109,11 +109,10 @@ class Bot(object):
                     'handler': getattr(module, 'handle')
                 }
 
-                LOG.info(_info)
-
                 if module.__doc__:
                     _info['whatis'] = module.__doc__.split('\n')[0]
                     _info['usage'] = module.__doc__
+                LOG.info(_info)
                 self.plugins[module_name] = _info
             except:
                 LOG.warning('Import failed on module {}, module not loaded!' .

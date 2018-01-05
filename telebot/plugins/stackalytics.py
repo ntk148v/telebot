@@ -192,7 +192,7 @@ def handle(bot, update):
     try:
         config = json.load(open('/tmp/stackalyticsconfig.json'))
     except FileNotFoundError:
-        msg = 'Config file doesn\' exist! Type /hep stackalytics again to \
+        msg = 'Config file doesn\'t exist! Type /help stackalytics again to \
                check usage!'
         utils.handle_error(LOG, bot, chat_id, msg)
         return
