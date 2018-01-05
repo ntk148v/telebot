@@ -26,5 +26,6 @@ def main(args):
     try:
         BOT = bot.Bot(config['telegram_token'])
         BOT.run()
-    except (KeyboardInterupt, SystemExit):
+    except (KeyboardInterrupt, SystemExit):
         BOT.stop()
+        return

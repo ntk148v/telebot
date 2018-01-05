@@ -1,1 +1,1 @@
-from telebot import main
+from telebot.run import main
