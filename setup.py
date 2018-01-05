@@ -16,7 +16,7 @@ setup(
     author='Kien Nguyen',
     author_email='kiennt2609@gmail.com',
     license='Apache-2.0',
-    scripts=['bin/telebot']
+    scripts=['bin/telebot'],
     url='https://github.com/ntk148v/telebot/',
     packages=['telebot', 'telebot.plugins'],
     include_package_data=True,
