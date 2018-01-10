@@ -12,13 +12,13 @@ def handle_error(logger, bot, chat_id, msg):
 
 def init_log(config):
     stream = config.get('logstream', False)
-    logfile = config.get('logfile', '/var/log/telebot.log')
+    logfile = config.get('logfile', '/tmp/telebot.log')
     loglevel = config.get('loglevel', logging.INFO)
     logformat = config.get(
         'logformat',
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
-    handlers = [logging.FileHandler(logfile), ]
+    handlers = [logging.FileHandler(logfile, mode='wb')]
     if stream:
         handlers.append(logging.StreamHandler())
 

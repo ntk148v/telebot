@@ -33,11 +33,11 @@ def handle(bot, update, args, job_queue, chat_data):
 
         # Add job to queue, run once
         job = job_queue.run_once(do_remind,
-                                 when=datetime.time(hour=hour, minute=minute),
-                                 context=context)
+                                when=datetime.time(hour=hour, minute=minute),
+                                context=context)
         chat_data['job'] = job
 
         update.message.reply_text('Timer successfully set!')
-
+        return
     except(IndexError, ValueError):
         update.message.reply_text('Usage: /remind hour:minute reminder')

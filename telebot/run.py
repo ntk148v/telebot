@@ -21,7 +21,8 @@ def main(args):
     if args.logstream:
         config['logstream'] = True
 
-    utils.init_log(config)
+    # Logging not ready yet
+    # utils.init_log(config)
 
     try:
         BOT = bot.Bot(config['telegram_token'])
