@@ -16,4 +16,4 @@ requirements:
 
 .PHONY: clean
 clean:
-	rm -rf build dist limbo.egg-info
+	rm -rf build dist telebot.egg-info
