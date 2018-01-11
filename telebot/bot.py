@@ -52,6 +52,11 @@ class Bot(object):
         file_handler = MessageHandler(filters=Filters.document,
                                       callback=self.get_config_file)
         self.dispatcher.add_handler(file_handler)
+        self.dispatcher.add_error_handler(self.error)
+
+    def error(self, bot, update, error):
+        """Log Errors caused by Updates."""
+        LOG.warning('Update "%s" caused error "%s"', update, error)
 
     def get_config_file(self, bot, update):
         """Handle config file upload. Stackalytics plugin need this!"""
@@ -81,6 +86,10 @@ class Bot(object):
 
     def stop(self):
         self.updater.stop()
+        return
+
+    def idle(self):
+        self.updater.idle()
         return
 
     def help(self, bot, update):
