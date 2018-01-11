@@ -49,23 +49,11 @@ class Bot(object):
                                           pass_chat_data=True)
 
             self.dispatcher.add_handler(_handler)
-        file_handler = MessageHandler(filters=Filters.document,
-                                      callback=self.get_config_file)
-        self.dispatcher.add_handler(file_handler)
         self.dispatcher.add_error_handler(self.error)
 
     def error(self, bot, update, error):
         """Log Errors caused by Updates."""
         LOG.warning('Update "%s" caused error "%s"', update, error)
-
-    def get_config_file(self, bot, update):
-        """Handle config file upload. Stackalytics plugin need this!"""
-        if not update.message.document:
-            return
-        else:
-            file_id = update.message.document.file_id
-            config_file = bot.get_file(file_id=file_id)
-            config_file.download(custom_path='/tmp/stackalyticsconfig.json')
 
     def _get_commands(self):
         commands = []
