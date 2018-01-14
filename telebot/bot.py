@@ -40,6 +40,11 @@ class Bot(object):
         self.dispatcher.add_handler(help_handler)
         # Init additional plugins handlers
         for plugin in self.plugins.keys():
+            if plugin in settings.NOTIFICATION_PLUGINS:
+                _handler = MessageHandler(
+                    Filters.text, callback=self.plugins[plugin]['handler'])
+                self.dispatcher.add_handler(_handler)
+                continue
             _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
             if plugin in settings.JOB_PLUGINS:
                 _handler = CommandHandler(plugin,

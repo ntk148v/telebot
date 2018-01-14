@@ -8,6 +8,7 @@ A [Telegram](https://telegram.org/) Bot written in Python (Work-In-Progress)
 
 ```
 $ git clone https://github.com/ntk148v/telebot
+$ cd telebot
 $ sudo -H pip3 install -r requirements.txt
 ```
 
