@@ -1,4 +1,4 @@
 export TELEGRAM_TOKEN="<put your telegram token>"
-export TELEBOT_LOGFILE='"/var/log/telebot.log"
+export TELEBOT_LOGFILE="/var/log/telebot.log"
 export TELEBOT_LOGFORMAT="<put your format>"
 export TELEBOT_LOGLEVEL="<put your log level>"
