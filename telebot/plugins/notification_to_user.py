@@ -4,8 +4,8 @@ have a configuration yaml file as template:
 
 For example:
 [
-    {"name": "@namnh307", "id": 473649555},
-    {"name": "@daidv", "id": 432649532}
+    {"name": "@namnh307", "id": "473649555"},
+    {"name": "@daidv", "id": "432649532"}
 ]
 """
 
