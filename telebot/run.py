@@ -2,7 +2,6 @@ import logging
 import os
 
 from telebot import bot
-from telebot import utils
 
 
 def get_config():
