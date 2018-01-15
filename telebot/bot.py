@@ -43,15 +43,16 @@ class Bot(object):
             if plugin in settings.NOTIFICATION_PLUGINS:
                 _handler = MessageHandler(
                     Filters.text, callback=self.plugins[plugin]['handler'])
-                self.dispatcher.add_handler(_handler)
-                continue
-            _handler = CommandHandler(plugin, self.plugins[plugin]['handler'])
-            if plugin in settings.JOB_PLUGINS:
+
+            elif plugin in settings.JOB_PLUGINS:
                 _handler = CommandHandler(plugin,
                                           self.plugins[plugin]['handler'],
                                           pass_args=True,
                                           pass_job_queue=True,
                                           pass_chat_data=True)
+            else:
+                _handler = CommandHandler(
+                    plugin, self.plugins[plugin]['handler'])
 
             self.dispatcher.add_handler(_handler)
         file_handler = MessageHandler(filters=Filters.document,

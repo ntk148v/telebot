@@ -1,4 +1,4 @@
-"""
+"""Send a direct message to user if user's name was mentioned in a group/channel.
 This plugin is to notification to user who is tagged. And this plugin need to
 have a configuration yaml file as template:
 
@@ -15,12 +15,8 @@ import json
 LOG = logging.getLogger(__name__)
 
 
-def check_messsage(list_user, message):
-    list_id = []
-    for user in list_user:
-        if user['name'] in message:
-            list_id.append(user['id'])
-    return list_id if len(list_id) != 0 else None
+def check_messsage(users, message):
+    return [user['id'] for user in users if user['name'] in message]
 
 
 def handle(bot, update):
@@ -29,11 +25,11 @@ def handle(bot, update):
     except FileNotFoundError:
         LOG.warning('There is no the config_user.json at all')
         return
-    list_id_user = check_messsage(config_user, update.message.text)
-    if list_id_user is not None:
+    user_ids = check_messsage(config_user, update.message.text)
+    if user_ids:
         msg = 'You have a message from: {0} with content: {1}'.format(
             update.message.from_user.username,
             update.message.text
         )
-        for id_user in list_id_user:
-            bot.send_message(chat_id=id_user, text=msg)
+        for user_id in user_ids:
+            bot.send_message(chat_id=user_id, text=msg)
