@@ -191,7 +191,7 @@ def get_report(workbook, worksheet, member, stats, targets,
 def handle(bot, update):
     chat_id = update.message.chat_id
     try:
-        config = json.load(open(os.getenv('STACKALYTICS_FIE')))
+        config = json.load(open(os.getenv('STACKALYTICS_FILE')))
     except FileNotFoundError:
         msg = 'Config file doesn\'t exist! Type /help stackalytics again to \
                check usage!'
