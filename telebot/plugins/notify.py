@@ -11,21 +11,19 @@ For example:
 
 import logging
 import json
+import os
 
 LOG = logging.getLogger(__name__)
 
 
-def check_messsage(users, message):
-    return [user['id'] for user in users if user['name'] in message]
-
-
 def handle(bot, update):
     try:
-        config_user = json.load(open('/tmp/config_user.json'))
+        users = json.load(open(os.getenv('NOTIFY_FILE')))
     except FileNotFoundError:
         LOG.warning('There is no the config_user.json at all')
         return
-    user_ids = check_messsage(config_user, update.message.text)
+    user_ids = [user['id'] for user in users if user['name']
+                in update.message.text]
     if user_ids:
         msg = 'You have a message from: {0} with content: {1}'.format(
             update.message.from_user.username,

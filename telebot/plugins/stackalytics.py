@@ -21,6 +21,7 @@ from datetime import date
 from datetime import timedelta
 import json
 import logging
+import os
 import urllib.error
 import urllib.request
 
@@ -190,7 +191,7 @@ def get_report(workbook, worksheet, member, stats, targets,
 def handle(bot, update):
     chat_id = update.message.chat_id
     try:
-        config = json.load(open('/tmp/stackalyticsconfig.json'))
+        config = json.load(open(os.getenv('STACKALYTICS_FIE')))
     except FileNotFoundError:
         msg = 'Config file doesn\'t exist! Type /help stackalytics again to \
                check usage!'
