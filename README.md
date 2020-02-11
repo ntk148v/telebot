@@ -24,7 +24,7 @@ $ source envs
 4. Run!
 
 ```
-$ makefile run
+$ make run
 ```
 
 5.  Invite Telebot (with your Bot name) into any groups/channels want it in or
