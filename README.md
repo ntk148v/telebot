@@ -1,5 +1,7 @@
 # Telebot
 
+**NOTE**: I rework Telebot right now. It might not work correctly.
+
 A [Telegram](https://telegram.org/) Bot written in Python (Work-In-Progress)
 
 ## Installation
