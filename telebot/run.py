@@ -6,8 +6,7 @@ from telebot import utils
 
 
 def get_config():
-    config = {}
-    config['telegram_token'] = os.getenv('TELEGRAM_TOKEN')
+    config = {'telegram_token': os.getenv('TELEGRAM_TOKEN')}
     config['loglevel'] = os.getenv('TELEBOT_LOGLEVEL')
     config['logfile'] = os.getenv('TELEBOT_LOGFILE')
     config['logformat'] = os.getenv('TELEBOT_LOGFORMAT')
