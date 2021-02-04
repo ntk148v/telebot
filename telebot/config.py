@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 LOG = logging.getLogger(__name__)
 
 load_dotenv()
-
 class Config:
     """Config to setup Telebot"""
     # Get these values from my.telegram.org

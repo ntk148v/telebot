@@ -4,6 +4,8 @@ import pathlib
 
 from telebot.config import Config
 
+CMD_HELP = {}
+
 # Create directory if not exist
 pathlib.Path(f'{Config.WORK_DIR}/logs').mkdir(parents=True, exist_ok=True)
 
