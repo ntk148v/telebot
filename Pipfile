@@ -10,6 +10,8 @@ tgcrypto = "*"
 asyncio = "*"
 prettytable = "*"
 aiohttp = "==3.6.2"
+beautifulsoup4 = "*"
+googlesearch-python = "*"
 
 [dev-packages]
 pylint = "*"

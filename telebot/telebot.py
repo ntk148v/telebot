@@ -14,16 +14,18 @@ class Telebot(Client):
     def __init__(self):
         name = self.__class__.__name__.lower()
         LOG.info('Settings Telebot configs')
+        kwargs = {}
+        if Config.BOT_TOKEN:
+            kwargs['bot_token'] = Config.BOT_TOKEN
         super().__init__(
-            Config.BOT_SESSION,
+            Config.USER_SESSION,
             plugins=dict(root=f"{name}/plugins"),
             workdir=Config.WORK_DIR,
             api_id=Config.API_ID,
             api_hash=Config.API_HASH,
-            bot_token=Config.BOT_TOKEN,
             workers=Config.WORKERS,
             parse_mode=Config.PARSE_MODE,
-        )
+            **kwargs)
 
     async def start(self):
         # Extend later

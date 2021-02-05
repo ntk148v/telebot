@@ -18,7 +18,7 @@ class Config:
     # Number of maximum concurrent workers for handling incoming updates.
     WORKERS = int(os.environ.get('WORKERS')) or os.cpu_count() + 4
     # Pass a string of your choice to give a name to the client session
-    BOT_SESSION = os.environ.get('BOT_SESSION', ':memory:')
+    USER_SESSION = os.environ.get('USER_SESSION', ':memory:')
     # specify command handler that should be used for the plugins
     # this should be a valid "regex" pattern
     COMMAND_HANDLER = os.environ.get('COMMAND_HANDLER', '/')
