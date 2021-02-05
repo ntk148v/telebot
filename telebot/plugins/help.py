@@ -11,10 +11,11 @@ from telebot.helpers.utilities import split_list
 heading = "──「 **{0}** 」──\n"
 
 
-@Client.on_message(filters.command("help", Config.COMMAND_HANDLER) & filters.me)
+@Client.on_message(filters.command("help", Config.COMMAND_HANDLER))
 async def module_help(_, message: Message):
     cmd = message.command
 
+    message = await message.reply_text("...")
     help_arg = ""
     if len(cmd) > 1:
         help_arg = " ".join(cmd[1:])

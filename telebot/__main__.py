@@ -1,4 +1,4 @@
-from telebot.telebot import Telebot
+from telebot import Telebot
 
 if __name__ == '__main__':
-    Telebot().run()
+    Telebot.run()

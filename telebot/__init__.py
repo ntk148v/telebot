@@ -3,8 +3,7 @@ from logging.handlers import RotatingFileHandler
 import pathlib
 
 from telebot.config import Config
-
-CMD_HELP = {}
+from telebot.telebot import Telebot
 
 # Create directory if not exist
 pathlib.Path(f'{Config.WORK_DIR}/logs').mkdir(parents=True, exist_ok=True)
@@ -22,3 +21,7 @@ logging.basicConfig(level=logging.INFO,
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 logging.getLogger("pyrogram.parser.html").setLevel(logging.ERROR)
 logging.getLogger("pyrogram.session.session").setLevel(logging.ERROR)
+
+CMD_HELP = {}
+Telebot = Telebot()
+Config = Config

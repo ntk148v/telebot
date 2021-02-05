@@ -9,6 +9,7 @@ python-dotenv = "*"
 tgcrypto = "*"
 asyncio = "*"
 prettytable = "*"
+aiohttp = "==3.6.2"
 
 [dev-packages]
 pylint = "*"
